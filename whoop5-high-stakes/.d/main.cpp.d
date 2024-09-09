@@ -75,7 +75,43 @@ bin/main.cpp.o: src/main.cpp include/main.h include/api.h \
  include/pros/optical.hpp include/pros/optical.h \
  include/pros/rotation.hpp include/pros/rotation.h include/pros/rtos.hpp \
  include/pros/screen.hpp include/pros/screen.h include/pros/vision.hpp \
- include/pros/vision.h include/pros/link.hpp include/pros/link.h
+ include/pros/vision.h include/pros/link.hpp include/pros/link.h \
+ include/rev/rev.hh include/rev/api/alg/drive/correction/correction.hh \
+ include/rev/api/alg/odometry/odometry.hh \
+ include/rev/api/units/q_angle.hh include/rev/api/units/r_quantity.hh \
+ include/rev/api/units/q_angular_speed.hh \
+ include/rev/api/units/q_frequency.hh include/rev/api/units/q_time.hh \
+ include/rev/api/units/q_length.hh include/rev/api/units/q_speed.hh \
+ include/rev/util/math/pose.hh include/rev/util/math/point_vector.hh \
+ include/rev/api/units/all_units.hh \
+ include/rev/api/units/q_acceleration.hh \
+ include/rev/api/units/q_angular_acceration.hh \
+ include/rev/api/units/q_angular_jerk.hh include/rev/api/units/q_area.hh \
+ include/rev/api/units/q_force.hh include/rev/api/units/q_mass.hh \
+ include/rev/api/units/q_jerk.hh include/rev/api/units/q_pressure.hh \
+ include/rev/api/units/q_torque.hh include/rev/api/units/q_volume.hh \
+ include/rev/api/units/r_quantity_name.hh \
+ include/rev/api/alg/drive/correction/no_correction.hh \
+ include/rev/api/alg/drive/correction/pilons_correction.hh \
+ include/rev/api/alg/drive/motion/motion.hh \
+ include/rev/api/alg/drive/motion/cascading_motion.hh \
+ include/rev/api/alg/drive/motion/constant_motion.hh \
+ include/rev/api/alg/drive/motion/proportional_motion.hh \
+ include/rev/api/alg/drive/stop/stop.hh \
+ include/rev/api/alg/drive/stop/simple_stop.hh \
+ include/rev/api/alg/drive/turn/turn.hh \
+ include/rev/api/alg/drive/turn/campbell_turn.hh \
+ include/rev/api/async/async_awaitable.hh \
+ include/rev/api/async/async_runnable.hh \
+ include/rev/api/hardware/chassis/chassis.hh \
+ include/rev/api/alg/odometry/two_rotation_inertial_odometry.hh \
+ include/pros/imu.hpp include/pros/rotation.hpp \
+ include/rev/api/alg/reckless/path.hh \
+ include/rev/api/alg/reckless/reckless.hh \
+ include/rev/api/hardware/chassis/skid_steer_chassis.hh include/api.h \
+ include/rev/api/async/async_runner.hh include/pros/apix.h \
+ include/pros/serial.h include/pros/serial.hpp include/globals.hh \
+ include/rev/rev.hh
 include/main.h:
 include/api.h:
 include/pros/adi.h:
@@ -229,3 +265,53 @@ include/pros/vision.hpp:
 include/pros/vision.h:
 include/pros/link.hpp:
 include/pros/link.h:
+include/rev/rev.hh:
+include/rev/api/alg/drive/correction/correction.hh:
+include/rev/api/alg/odometry/odometry.hh:
+include/rev/api/units/q_angle.hh:
+include/rev/api/units/r_quantity.hh:
+include/rev/api/units/q_angular_speed.hh:
+include/rev/api/units/q_frequency.hh:
+include/rev/api/units/q_time.hh:
+include/rev/api/units/q_length.hh:
+include/rev/api/units/q_speed.hh:
+include/rev/util/math/pose.hh:
+include/rev/util/math/point_vector.hh:
+include/rev/api/units/all_units.hh:
+include/rev/api/units/q_acceleration.hh:
+include/rev/api/units/q_angular_acceration.hh:
+include/rev/api/units/q_angular_jerk.hh:
+include/rev/api/units/q_area.hh:
+include/rev/api/units/q_force.hh:
+include/rev/api/units/q_mass.hh:
+include/rev/api/units/q_jerk.hh:
+include/rev/api/units/q_pressure.hh:
+include/rev/api/units/q_torque.hh:
+include/rev/api/units/q_volume.hh:
+include/rev/api/units/r_quantity_name.hh:
+include/rev/api/alg/drive/correction/no_correction.hh:
+include/rev/api/alg/drive/correction/pilons_correction.hh:
+include/rev/api/alg/drive/motion/motion.hh:
+include/rev/api/alg/drive/motion/cascading_motion.hh:
+include/rev/api/alg/drive/motion/constant_motion.hh:
+include/rev/api/alg/drive/motion/proportional_motion.hh:
+include/rev/api/alg/drive/stop/stop.hh:
+include/rev/api/alg/drive/stop/simple_stop.hh:
+include/rev/api/alg/drive/turn/turn.hh:
+include/rev/api/alg/drive/turn/campbell_turn.hh:
+include/rev/api/async/async_awaitable.hh:
+include/rev/api/async/async_runnable.hh:
+include/rev/api/hardware/chassis/chassis.hh:
+include/rev/api/alg/odometry/two_rotation_inertial_odometry.hh:
+include/pros/imu.hpp:
+include/pros/rotation.hpp:
+include/rev/api/alg/reckless/path.hh:
+include/rev/api/alg/reckless/reckless.hh:
+include/rev/api/hardware/chassis/skid_steer_chassis.hh:
+include/api.h:
+include/rev/api/async/async_runner.hh:
+include/pros/apix.h:
+include/pros/serial.h:
+include/pros/serial.hpp:
+include/globals.hh:
+include/rev/rev.hh:

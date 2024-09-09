@@ -1,20 +1,8 @@
 #include "main.h"
+#include "rev/rev.hh"
+#include "globals.hh"
 
-/**
- * A callback function for LLEMU's center button.
- *
- * When this callback is fired, it will toggle line 2 of the LCD text between
- * "I was pressed!" and nothing.
- */
-void on_center_button() {
-	static bool pressed = false;
-	pressed = !pressed;
-	if (pressed) {
-		pros::lcd::set_text(2, "I was pressed!");
-	} else {
-		pros::lcd::clear_line(2);
-	}
-}
+using namespace rev;
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -24,9 +12,31 @@ void on_center_button() {
  */
 void initialize() {
 	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello PROS User!");
 
-	pros::lcd::register_btn1_cb(on_center_button);
+	chassis = std::make_shared<rev::SkidSteerChassis>(left_motor_group, right_motor_group);
+	odom = std::make_shared<rev::TwoRotationInertialOdometry>(
+    fwd,      // The forward sensor
+    lat,      // The rightward sensor 
+    imu,      // Inertial sensor
+    WHEEL_DIAMETER,  // Diameter of forward wheel
+    WHEEL_DIAMETER,  // Diameter of sideways wheel
+    FORWARD_WHEEL_OFFSET,  // How far to the right of the center of the robot the forward wheel is
+    LATERAL_WHEEL_OFFSET    // How far to the rear of the robot the lateral wheel is from the center
+  );
+
+  turn = std::make_shared<CampbellTurn>(chassis, odom, TURN_IKP1, TURN_IKP2);
+  reckless = std::make_shared<Reckless>(chassis, odom);
+
+  odom_runner = std::make_shared<rev::AsyncRunner>(odom);
+	reckless_runner = std::make_shared<rev::AsyncRunner>(reckless);
+	turn_runner = std::make_shared<rev::AsyncRunner> (turn);
+
+	pros::lcd::initialize();
+
+  pros::delay(2000);
+  odom->reset_position();
+
+  
 }
 
 /**
@@ -58,7 +68,73 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
+void autonomous() {
+
+	/*
+	 * The following function call will drive the robot to the point 20_in, 0_in. The 0_deg is meaningless,
+	 * but it is still required otherwise there will be a compiler error. 
+	 * The code can be copy and pasted, you just have to change out the coordinates to go to a different spot. 
+	*/
+	reckless->go(RecklessPath().with_segment(
+		RecklessPathSegment(
+			std::make_shared<ConstantMotion>(0.5),
+			std::make_shared<PilonsCorrection>(4, 0.3_in),
+			std::make_shared<SimpleStop>(0.03_s, 0.15_s, 0.3), 
+			{ 20_in, 0_in, 0_deg }, 0_in)
+	));
+	reckless->await(); // don't run the next code until the robot has reached the target
+
+	// turn the robot 90 degrees
+	turn->turn_to_target_absolute(0.7, 90_deg);
+	turn->await();
+
+
+
+	reckless->go(RecklessPath().with_segment(
+		RecklessPathSegment(
+			std::make_shared<ConstantMotion>(0.5),
+			std::make_shared<PilonsCorrection>(4, 0.3_in),
+			std::make_shared<SimpleStop>(0.03_s, 0.15_s, 0.3), 
+			{ 20_in, 20_in, 0_deg }, 0_in)
+	));
+	reckless->await();
+
+
+	turn->turn_to_target_absolute(0.7, 180_deg);
+	turn->await();
+
+
+
+
+	reckless->go(RecklessPath().with_segment(
+		RecklessPathSegment(
+			std::make_shared<ConstantMotion>(0.5),
+			std::make_shared<PilonsCorrection>(4, 0.3_in),
+			std::make_shared<SimpleStop>(0.03_s, 0.15_s, 0.3), 
+			{ 0_in, 20_in, 0_deg }, 0_in)
+	));
+	reckless->await();
+
+
+	turn->turn_to_target_absolute(0.7, 270_deg);
+	turn->await();
+
+
+
+
+
+	reckless->go(RecklessPath().with_segment(
+		RecklessPathSegment(
+			std::make_shared<ConstantMotion>(0.5),
+			std::make_shared<PilonsCorrection>(4, 0.3_in),
+			std::make_shared<SimpleStop>(0.03_s, 0.15_s, 0.3), 
+			{ 0_in, 0_in, 0_deg }, 0_in)
+	));
+	reckless->await();
+
+	turn->turn_to_target_absolute(0.7, 0_deg);
+	turn->await();
+}
 
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -76,8 +152,6 @@ void autonomous() {}
 void opcontrol() {
 	pros::lcd::set_text(0, "Hello PROS User!");
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	pros::Motor left_mtr(1);
-	pros::Motor right_mtr(2);
 
 	while (true) {
 		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
@@ -86,8 +160,8 @@ void opcontrol() {
 		int left = master.get_analog(ANALOG_LEFT_Y);
 		int right = master.get_analog(ANALOG_RIGHT_Y);
 
-		left_mtr = left;
-		right_mtr = right;
+		left_motor_group = left;
+		right_motor_group = right;
 
 		pros::delay(20);
 	}

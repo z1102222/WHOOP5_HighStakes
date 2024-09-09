@@ -4,7 +4,8 @@
       "name": "PROS Project",
       "includePath": [
         "${workspaceFolder}/**",
-        "c:\\Users\\Jerem\\OneDrive\\Documents\\career\\tamu\\clubs\\aggie robotics\\pros_test\\whoop5-highstakes\\whoop5-high-stakes\\include"
+        "c:\\Users\\Jerem\\OneDrive\\Documents\\career\\tamu\\clubs\\aggie robotics\\pros_test\\whoop5-highstakes\\whoop5-high-stakes\\include",
+        "c:\\Users\\Jerem\\OneDrive\\Documents\\career\\tamu\\clubs\\aggie_robotics\\whoop5-highstakes\\whoop5-high-stakes\\include"
       ],
       "defines": [
         "_DEBUG",
@@ -17,7 +18,7 @@
       "intelliSenseMode": "gcc-arm",
       "browse": {
         "path": [
-          "c:\\Users\\Jerem\\OneDrive\\Documents\\career\\tamu\\clubs\\aggie robotics\\pros_test\\whoop5-highstakes\\whoop5-high-stakes"
+          "c:\\Users\\Jerem\\OneDrive\\Documents\\career\\tamu\\clubs\\aggie_robotics\\whoop5-highstakes\\whoop5-high-stakes"
         ],
         "limitSymbolsToIncludedHeaders": true,
         "databaseFilename": ""
