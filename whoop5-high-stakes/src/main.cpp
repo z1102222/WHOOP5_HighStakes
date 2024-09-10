@@ -55,7 +55,9 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
-void competition_initialize() {}
+void competition_initialize() {
+
+}
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
@@ -69,7 +71,6 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-
 	/*
 	 * The following function call will drive the robot to the point 20_in, 0_in. The 0_deg is meaningless,
 	 * but it is still required otherwise there will be a compiler error. 
@@ -157,11 +158,13 @@ void opcontrol() {
 		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
 		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
 		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
-		int left = master.get_analog(ANALOG_LEFT_Y);
-		int right = master.get_analog(ANALOG_RIGHT_Y);
+		
+		int rightX = master.get_analog(ANALOG_RIGHT_X);
+		int leftY = master.get_analog(ANALOG_LEFT_Y);
+		
 
-		left_motor_group = left;
-		right_motor_group = right;
+		left_motor_group = leftY+rightX;
+		right_motor_group = leftY-rightX;
 
 		pros::delay(20);
 	}

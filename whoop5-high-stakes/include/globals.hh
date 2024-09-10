@@ -5,20 +5,20 @@
 
 
 // Ports
-#define LEFT_MOTOR_GROUP {1, 2, 3}
-#define RIGHT_MOTOR_GROUP {4, 5, 6}
-#define INTAKE {7, 8}
+#define LEFT_MOTOR_GROUP {-11, -18, -13}
+#define RIGHT_MOTOR_GROUP {6, 5, 2}
+#define INTAKE {7, 17}
 
-#define IMU_PORT 20
-#define FWD_PORT 1
-#define LAT_PORT 2
+#define IMU_PORT 4
+#define FWD_PORT -1
+#define LAT_PORT -14
 
-#define BEAM_BREAK_PORT 'A'
+#define BEAM_BREAK_PORT 'H'
 
 #define BACK_WING_L_PORT 'B'
 #define BACK_WING_R_PORT 'C'
 #define FRONT_WINGS_PORT 'D'
-#define ODOM_HYDRAULIC_PORT 'E'
+#define ODOM_HYDRAULIC_PORT {16,'6'}, true
 
 // Parameters
 #define WHEEL_DIAMETER 63.89_mm        // Diameter of forward and sideways wheel
