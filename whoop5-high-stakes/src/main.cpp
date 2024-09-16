@@ -81,7 +81,7 @@ void autonomous() {
 			std::make_shared<ConstantMotion>(0.5),
 			std::make_shared<PilonsCorrection>(4, 0.3_in),
 			std::make_shared<SimpleStop>(0.03_s, 0.15_s, 0.3), 
-			{ 20_in, 0_in, 0_deg }, 0_in)
+			{ 0_in, 20_in, 0_deg }, 0_in)
 	));
 	reckless->await(); // don't run the next code until the robot has reached the target
 
@@ -115,7 +115,6 @@ void autonomous() {
 			{ 0_in, 20_in, 0_deg }, 0_in)
 	));
 	reckless->await();
-
 
 	turn->turn_to_target_absolute(0.7, 270_deg);
 	turn->await();
