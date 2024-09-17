@@ -1,9 +1,10 @@
 #include "main.h"
 #include "rev/rev.hh"
 #include "globals.hh"
+#include <string>
 
 using namespace rev;
-
+using namespace std;
 /**
  * Runs initialization code. This occurs as soon as the program is started.
  *
@@ -17,7 +18,7 @@ void initialize() {
 	odom = std::make_shared<rev::TwoRotationInertialOdometry>(
     fwd,      // The forward sensor
     lat,      // The rightward sensor 
-    imu,      // Inertial sensor
+    imu,      // Inertial sensor 
     WHEEL_DIAMETER,  // Diameter of forward wheel
     WHEEL_DIAMETER,  // Diameter of sideways wheel
     FORWARD_WHEEL_OFFSET,  // How far to the right of the center of the robot the forward wheel is
@@ -77,13 +78,17 @@ void autonomous() {
 	 * The code can be copy and pasted, you just have to change out the coordinates to go to a different spot. 
 	*/
 	odomHydraulic.set_value(ODOM_DOWN);
+	pros::lcd::set_text(1, std::to_string(odom -> get_state().pos.x.convert(inch)));
+	pros::lcd::set_text(2, std::to_string(odom -> get_state().pos.y.convert(inch)));
+	pros::lcd::set_text(3, std::to_string(odom -> get_state().pos.theta.convert(degree)));
+
 
 	reckless->go(RecklessPath().with_segment(
 		RecklessPathSegment(
-			std::make_shared<ConstantMotion>(0.5),
+			std::make_shared<ConstantMotion>(0.2),
 			std::make_shared<PilonsCorrection>(4, 0.3_in),
 			std::make_shared<SimpleStop>(0.03_s, 0.15_s, 0.3), 
-			{ 5_in, 0_in, 0_deg }, 0_in)
+			{ 1_in, 0_in, 0_deg }, 0_in)
 	));
 	reckless->await(); // don't run the next code until the robot has reached the target
 
