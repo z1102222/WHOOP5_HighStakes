@@ -18,7 +18,7 @@
 #define BACK_WING_L_PORT 'B'
 #define BACK_WING_R_PORT 'C'
 #define FRONT_WINGS_PORT 'D'
-#define ODOM_HYDRAULIC_PORT {16,'6'}, true
+#define ODOM_HYDRAULIC_PORT {16,'G'}, true
 
 // Parameters
 #define WHEEL_DIAMETER 63.89_mm        // Diameter of forward and sideways wheel
@@ -28,6 +28,8 @@
 #define TURN_IKP1 0.18
 #define TURN_IKP2 0.07
 
+#define ODOM_UP 1
+#define ODOM_DOWN 0
 
 extern std::shared_ptr<rev::AsyncRunner> odom_runner;
 extern std::shared_ptr<rev::AsyncRunner> reckless_runner;

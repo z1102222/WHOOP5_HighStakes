@@ -76,12 +76,14 @@ void autonomous() {
 	 * but it is still required otherwise there will be a compiler error. 
 	 * The code can be copy and pasted, you just have to change out the coordinates to go to a different spot. 
 	*/
+	odomHydraulic.set_value(ODOM_DOWN);
+
 	reckless->go(RecklessPath().with_segment(
 		RecklessPathSegment(
 			std::make_shared<ConstantMotion>(0.5),
 			std::make_shared<PilonsCorrection>(4, 0.3_in),
 			std::make_shared<SimpleStop>(0.03_s, 0.15_s, 0.3), 
-			{ 0_in, 20_in, 0_deg }, 0_in)
+			{ 5_in, 0_in, 0_deg }, 0_in)
 	));
 	reckless->await(); // don't run the next code until the robot has reached the target
 
@@ -152,6 +154,7 @@ void autonomous() {
 void opcontrol() {
 	pros::lcd::set_text(0, "Hello PROS User!");
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
+	odomHydraulic.set_value(ODOM_UP);
 
 	while (true) {
 		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
