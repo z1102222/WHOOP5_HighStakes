@@ -163,8 +163,8 @@ void opcontrol() {
 
 	while (true) {
 		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
-		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
-		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
+		(pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
+		(pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
 		
 		int rightX = master.get_analog(ANALOG_RIGHT_X);
 		int leftY = master.get_analog(ANALOG_LEFT_Y);

@@ -10,8 +10,8 @@
 #define INTAKE {7, 17}
 
 #define IMU_PORT 4
-#define FWD_PORT 1
-#define LAT_PORT 14
+#define FWD_PORT 1, true
+#define LAT_PORT 14, true
 
 #define BEAM_BREAK_PORT 'H'
 
